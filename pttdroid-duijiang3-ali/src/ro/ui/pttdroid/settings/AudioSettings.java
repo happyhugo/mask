@@ -40,8 +40,8 @@ public class AudioSettings extends PreferenceActivity {
 //	public static final String IP = "192.168.2.124";
 //	public static final String IP = "115.28.39.5";
 	
-	public static final String IP = "192.168.2.180";
-	public static final int PROT = 1234;
+	public static final String IP = "192.168.2.218";
+	public static final int PROT = 13618;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

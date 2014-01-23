@@ -22,7 +22,7 @@ public class Start {
 			public void run() {
 			    ServerSocket serverSocket = null;
 			    try {
-			    	serverSocket =  new ServerSocket(1234);
+			    	serverSocket =  new ServerSocket(13618);
 			    }
 			    catch (IOException e) {
 			    	e.printStackTrace();
