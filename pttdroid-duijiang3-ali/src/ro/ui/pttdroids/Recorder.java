@@ -20,16 +20,9 @@ package ro.ui.pttdroids;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
 
 import ro.ui.pttdroid.codecs.Speex;
-import ro.ui.pttdroid.settings.AudioSettings;
-import ro.ui.pttdroid.settings.CommSettings;
 import ro.ui.pttdroid.util.AudioParams;
-import ro.ui.pttdroid.util.PhoneIPs;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder.AudioSource;

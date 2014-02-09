@@ -22,30 +22,18 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import ro.ui.pttdroid.codecs.Speex;
-import ro.ui.pttdroid.settings.AudioSettings;
-import ro.ui.pttdroid.settings.CommSettings;
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-public class Main extends Activity implements OnTouchListener {
-
-	private static boolean isStarting = true;	
+public class Main extends Activity implements OnTouchListener {	
 	
 	private ImageView microphoneImage;	
 	
@@ -55,6 +43,9 @@ public class Main extends Activity implements OnTouchListener {
 	
 	private static int microphoneState = MIC_STATE_NORMAL;
 	
+//	public static final String IP = "111.205.107.118";
+	public static final String IP = "192.168.1.102";
+	public static final int PROT = 13618;
 	/*
 	 * Threads for recording and playing audio data.
 	 * This threads are stopped only if isFinishing() returns true on onDestroy(), meaning the back button was pressed.
@@ -115,56 +106,6 @@ public class Main extends Activity implements OnTouchListener {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	getMenuInflater().inflate(R.menu.menu, menu);
-    	return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	Intent i; 
-    	
-    	switch(item.getItemId()) {
-    	case R.id.settings_comm:
-    		i = new Intent(this, CommSettings.class);
-    		startActivityForResult(i, 0);    		
-    		return true;
-    	case R.id.settings_audio:
-    		i = new Intent(this, AudioSettings.class);
-    		startActivityForResult(i, 0);    		
-    		return true;    
-    	case R.id.settings_reset_all:
-    		return resetAllSettings();    		
-    	default:
-    		return super.onOptionsItemSelected(item);
-    	}
-    }
-    
-    /**
-     * Reset all settings to their default value
-     * @return
-     */
-    private boolean resetAllSettings() {
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    	
-    	Editor editor = prefs.edit();
-    	editor.clear();
-    	editor.commit();   
-    	
-    	Toast toast = Toast.makeText(this, getString(R.string.setting_reset_all_confirm), Toast.LENGTH_SHORT);
-    	toast.setGravity(Gravity.CENTER, 0, 0);
-    	toast.show();
-
-    	return true;
-    }
-    
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	CommSettings.getSettings(this);     	    	
-    	AudioSettings.getSettings(this);    	
-    }
     
     public boolean onTouch(View v, MotionEvent e) {
     	if(getMicrophoneState()!=MIC_STATE_DISABLED) {    		
@@ -254,13 +195,13 @@ public class Main extends Activity implements OnTouchListener {
     		player.start();
     		recorder.start(); 
     		
-    		isStarting = false;    		
+//    		isStarting = false;    		
    //s 	}
     }
     
     private void InitSocket(){
     	try {
-			socket = new Socket(AudioSettings.IP,AudioSettings.PROT);
+			socket = new Socket(IP,PROT);
 			System.out.println("link to server");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -294,7 +235,7 @@ public class Main extends Activity implements OnTouchListener {
 
     		
     		// Resetting isStarting.
-    		isStarting = true;
+//    		isStarting = true;
     		
     	}	
     	

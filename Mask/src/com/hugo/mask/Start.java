@@ -35,12 +35,14 @@ public class Start {
 			            socket = serverSocket.accept();
 		    			System.out.println("receivebuffer:"+socket.getReceiveBufferSize());
 		    			System.out.println("sendbuffer:"+socket.getSendBufferSize());
-			            if(ChatTools.stList.size()<2){
-			            	new ServerThread(socket,ChatTools.no).start();
-			            }else{
-			            	System.out.println("refuse user");
-			            	socket.close();
-			            }
+//			            if(ChatTools.stList.size()<2){
+		    			ServerThread st = new ServerThread(socket);
+			            ChatTools.addClient(st);
+			            st.start();
+//			            }else{
+//			            	System.out.println("refuse user");
+//			            	socket.close();
+//			            }
 			        }catch(Exception e){
 			            e.printStackTrace();
 			        } 
